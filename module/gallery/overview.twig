@@ -1,0 +1,15 @@
+<div class="form-row m-0">
+    {% for name, gallery in config.galleries %}
+        <div class="col-md-6 col-lg-4 col-xl-3 p-0">
+            <a class="card card-link border-0 rounded-0 gallery-item overflow-hidden bg-black" href="{{ base_url() }}/{{ page.getLanguage().getLocale() }}/{{ page.getName() }}/{{ name }}">
+                <div class="background-cover" style="background-image:url('{{ base_url() }}/uploads/{{ gallery.cover }}');"></div>
+                <div class="card-body w-100">
+                    <h5 class="card-title">{{ gallery.title }}</h5>
+                    {% if gallery.description %}
+                        <p class="card-text">{{ gallery.description }}</p>
+                    {% endif %}
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>

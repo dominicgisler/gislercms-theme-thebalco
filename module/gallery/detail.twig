@@ -1,0 +1,75 @@
+<div class="form-row m-0">
+    <div class="col-md-6 col-lg-4 col-xl-3 p-0">
+        <div class="card card-link border-0 rounded-0 gallery-item overflow-hidden p-4 bg-black">
+            <h1>{{ gallery.title }}</h1>
+            {% if gallery.description %}
+                <p>{{ gallery.description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% for img in glob('../public/uploads/' ~ gallery.path ~ '/*.*') %}
+        {% set path = img|replace({ '../public/': '' }) %}
+        {% set thumb = path %}
+        {% if img|replace({ 'public/uploads': 'public/thumb' })|file_exists %}
+            {% set thumb = img|replace({ '../public/uploads': 'thumb' }) %}
+        {% elseif img|replace({ 'public/uploads': 'public/thumbs' })|file_exists %}
+            {% set thumb = img|replace({ '../public/uploads': 'thumbs' }) %}
+        {% endif %}
+        <div class="col-md-6 col-lg-4 col-xl-3 p-0">
+            <a class="card card-link border-0 rounded-0 gallery-item overflow-hidden bg-black" href="{{ base_url() }}/{{ path }}" data-toggle="modal" data-target="#item-modal" data-item="{{ loop.index0 }}">
+                <div class="background-cover" style="background-image:url('{{ base_url() }}/{{ thumb }}');"></div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+<div class="modal fade" id="item-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content d-block">
+            <div class="modal-body text-center p-0 bg-black">
+                <div id="galleryCarousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for img in glob('../public/uploads/' ~ gallery.path ~ '/*.*') %}
+                            <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                <img data-src="{{ base_url() }}/{{ img|replace({ '../public/': '' }) }}" class="d-block w-100">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a class="carousel-control-prev" href="#galleryCarousel" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#galleryCarousel" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function modalListener() {
+        if (window.jQuery) {
+            $('#item-modal').on('show.bs.modal', function (event) {
+                var target = $(event.relatedTarget);
+                var item = target.data('item');
+                var modal = $(this);
+
+                var img = modal.find('#galleryCarousel').find('.carousel-item img')[item];
+                if (!$(img).attr('src')) {
+                    $(img).attr('src', $(img).data('src'));
+                }
+                modal.find('#galleryCarousel').carousel(item);
+            });
+            $('#galleryCarousel').on('slide.bs.carousel', function(e) {
+                var $img = $(e.relatedTarget).find('img');
+                if (!$img.attr('src')) {
+                    $img.attr('src', $img.data('src'));
+                }
+            });
+        } else {
+            window.setTimeout(modalListener, 100);
+        }
+    }
+    modalListener();
+</script>

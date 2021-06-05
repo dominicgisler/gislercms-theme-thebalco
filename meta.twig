@@ -5,20 +5,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<meta itemprop="name" content="{{ page.getTitle() }}">
+<meta itemprop="name" content="{{ page.getTitle() }} | TheBalco">
 <meta itemprop="description" content="{{ page.getMetaDescription() }}">
 <meta itemprop="image" content="{{ meta_img }}">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@publisher_handle">
-<meta name="twitter:title" content="{{ page.getTitle() }}">
+<meta name="twitter:title" content="{{ page.getTitle() }} | TheBalco">
 <meta name="twitter:description" content="{{ page.getMetaDescription() }}">
 <meta name="twitter:creator" content="@author_handle">
 <meta name="twitter:image:src" content="{{ meta_img }}">
 
 <meta property="og:url" content="{{ base_url() }}/{{ page.getLanguage().getLocale() }}/{{ page.getName() }}">
 <meta property="og:type" content="website">
-<meta property="og:title" content="{{ page.getTitle() }}">
+<meta property="og:title" content="{{ page.getTitle() }} | TheBalco">
 <meta property="og:description" content="{{ page.getMetaDescription() }}">
 <meta property="og:image" content="{{ meta_img }}">
 
@@ -35,3 +35,13 @@
 {% endfor %}
 
 <link rel="canonical" href="{{ base_url() }}/{{ page.getLanguage().getLocale() }}/{{ page.getName() }}">
+
+<link rel="apple-touch-icon" sizes="180x180" href="{{ base_url() }}/assets/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ base_url() }}/assets/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="{{ base_url() }}/assets/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ base_url() }}/assets/favicon-16x16.png">
+<link rel="manifest" href="{{ base_url() }}/assets/site.webmanifest">
+<link rel="shortcut icon" href="{{ base_url() }}/favicon.ico">
+<meta name="apple-mobile-web-app-title" content="TheBalco">
+<meta name="application-name" content="TheBalco">
+<meta name="theme-color" content="#000000">

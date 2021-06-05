@@ -1,7 +1,9 @@
-<header class="border rounded bg-light text-center p-4 display-4">
-    <div class="row">
-        <a href="{{ base_url() }}" class="col-10 col-sm-8 col-lg-6 m-auto">
-            <img src="{{ base_url() }}/assets/img/logo.png" alt="Logo" class="mw-100">
+<header class="bg-dark p-5" >
+    {% set locale = page.getLanguage().getLocale() %}
+    {% set navigation = module.getByName('navigation-' ~ locale).getConfig()|json_decode %}
+    <nav class="navbar navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="{{ base_url() }}">
+            <img src="{{ base_url() }}/assets/img/logo.png" alt="Logo" class="mw-100" style="height: 70px;">
         </a>
-    </div>
+    </nav>
 </header>
